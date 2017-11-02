@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    #recycle{
+        width: 200px;
+        height: 50px;
+        border: 1px dashed;
+        line-height: 50px;
+        text-align: center;
+    }
+    #output{
+        float: left;
+        margin: 10px;
+        text-align: center;
+        width: 500px;
+    }
+    .photoframe{
+        width: 500px;
+        height: 438px;
+        text-align: center;
+        float: left;
+        background: url("image/photoframe.jpg");
+    }
+
+    /*使图片在相框里面居中*/
+    .block{
+        width: 0px;
+        height: 80%;
+    }
+
+</style>
+
+<script>
+    window.onload=inliload;
+    function inliload() {
+        var recycle=document.getElementById("recycle");
+        //解禁元素为可放置被拖拽的元素区域
+        recycle.ondragover=allowDrop;
+        //生成带相框图片效果
+        recycle.ondrop=fileDrop;
+    }
+
+
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function fileDrop(e) {
+        e.preventDefault();
+        
+        //清空图片展示区域
+        var output=document.getElementById("output");
+        output.innerHTML="";
+        //获取本地被拖拽的文件的files数组
+        var files=e.dataTransfer.files;
+        //遍历同时被拖拽文件并放置到指定区域的所有文件
+        for (var i=0,f;f=files[i];i++){
+            //获取当前图片的url
+            var imgURL=window.URL.createObjectURL(f);
+            //创建图片的img
+            var img=document.createElement("img");
+            //设置图片img的src为当前图片的url地址
+            img.setAttribute("src",imgURL);
+            img.setAttribute("width","330");
+            img.setAttribute("height","270");
+            
+            //创建相框对象photo
+            var photo=document.createElement("div");
+            //为相框div添加classname
+            photo.setAttribute("class","photoframe");
+            //将图片添加到相框中
+            photo.appendChild(img);
+
+
+            //创建图片对象img2
+            var img2=document.createElement("img");
+            img2.setAttribute("class","block");
+            photo.appendChild(img2);
+
+            //添加相框的图片效果
+            output.appendChild(photo);
+
+        }
+    }
+</script>
+<body>
+<h3>图片相框展示设计</h3>
+<hr>
+<div id="recycle">将图片拖放到这里</div><br>
+<div id="output"></div>
+
+</body>
+</html>

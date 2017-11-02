@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            text-align: center;
+            margin-top: 10px;
+            /*margin-bottom: 10px;*/
+        }
+
+        #calendar{
+            width: 400px;
+            margin: auto;
+        }
+        button{
+            width: 25%;
+            float: left;
+            height: 40px;
+        }
+        #month{
+            width: 50%;
+            float: left;
+        }
+        .everyday{
+            width: 14%;
+            float: left;
+        }
+    </style>
+
+
+</head>
+
+<body onload="showDate()">
+<h3>电子日历设计</h3>
+<hr>
+
+<div id="calendar">
+    <!--状态栏-->
+    <div>
+        <button onclick="lastMonth()">上个月</button>
+        <div id="month"></div>
+        <button onclick="nextmonth()">下个月</button>
+    </div>
+    <!--显示星期几-->
+    <div>
+        <div class="everyday">日</div>
+        <div class="everyday">一</div>
+        <div class="everyday">二</div>
+        <div class="everyday">三</div>
+        <div class="everyday">四</div>
+        <div class="everyday">五</div>
+        <div class="everyday">六</div>
+    </div>
+    <!--显示当前月份每天的日期-->
+    <div id="day"></div>
+
+
+    <script>
+//        显示状态栏中的年份和月份
+        var today=new Date();
+        var year=today.getFullYear();
+        var month=today.getMonth()+1;
+        var day=today.getDate();
+        function showmonth() {
+            document.getElementById("month").innerHTML=year+"年"+month+"月";
+        }
+
+//        计算当前月份天数
+
+
+
+
+//        显示月份日历
+        function showDate() {
+            showmonth();
+
+//            计算当前月份天数
+            var allday=0;
+            if(month!=2){
+                if((month==4)||(month==6)||(month==9)||(month==11)){
+                    allday=30;
+                }
+                else {
+                    allday=31;
+                }
+            }
+            else {
+                if ((year%4)==0&&(year%100)!=0||(year%400)==0){
+                    allday=29;
+                }
+                else {
+                    allday=28;
+                }
+            }
+
+
+
+//            计算当前月份第一天星期几
+            var firstday= new Date(year,month-1,1);
+            var xiqi=firstday.getDay();
+
+            var daterow=document.getElementById("day")
+            daterow.innerHTML="";
+            if(xiqi!=0){
+                for(var i=0;i<xiqi;i++){
+                    var newdiv=document.createElement("div");
+                    newdiv.className="everyday";
+                    daterow.appendChild(newdiv);
+                }
+            }
+
+            for (var j=1;j<=allday;j++){
+                var newdiv=document.createElement("div");
+                newdiv.className="everyday";
+                newdiv.innerHTML=j+"";
+                if(j==day){
+                    newdiv.style.color="red";
+                }
+                daterow.appendChild(newdiv);
+            }
+        }
+
+
+//        按钮设置
+            function lastMonth() {
+                if (month>1){
+                    month=month-1;
+                }
+                else {
+                    month=12;
+                    year=year-1;
+                }
+                showDate();
+            }
+
+            function nextmonth() {
+                if(month==12){
+                    month=1;
+                    year=year+1;
+                }
+                else {
+                    month=month+1;
+                }
+                showDate();
+            }
+    </script>
+</div>
+</body>
+</html>

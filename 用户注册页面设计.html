@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+</head>
+<style>
+    body{
+        background-color: #CCCCCC;
+    }
+    #container{
+        width: 600px;
+        background-color: white;
+        color: #2289F0;
+        padding: 15px;
+        margin-top: 100px;
+        margin-bottom: 0px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        font-family: "微软雅黑 Light";
+        box-shadow: 10px 10px 15px black;
+    }
+    hr{
+        width: 80%;
+        border: 1px #2289F0 solid;
+        margin-bottom: 15px;
+    }
+
+    .td1{
+        width: 65px;
+        height: 25px;
+
+        /*文字对齐*/
+        text-align:right;
+        display: inline-block
+    }
+    input{
+        width: 180px;
+        height: 20px;
+        margin: 5px;
+        border:  double 1px #2289F0;
+    }
+    button{
+        width: 120px;
+        height: 40px;
+        background-color: #2289F0;
+        color: white;
+        border: 0px;
+        font-size: 18px;
+        font-family: "微软雅黑 Light";
+        font-weight: bold;
+    }
+    button:hover{
+        background-color: #0068D0;
+    }
+    ul{
+        text-align: center;
+    }
+    li{
+        list-style: none;
+        display: inline;
+    }
+
+
+</style>
+
+<script>
+
+
+    window.onload=inload;
+    function inload() {
+        document.getElementById("sub").onclick=btnlogin;
+    }
+    function btnlogin() {
+        //验证密码是否一致
+        var j=0;
+        var q1=document.getElementById("pwd").value;
+        var q2=document.getElementById("pwd1").value;
+        if(q1!=q2){
+            window.alert("两次密码不一致请重新输入");
+            j++;
+        }
+
+    if(j==0) {
+        var al = "";
+        al = al + "用户名：" + document.getElementById("username").value;
+        al = al + "密码：" + document.getElementById("pwd").value;
+        al = al + "姓名：" + document.getElementById("name").value;
+        al = al + "邮箱：" + document.getElementById("email").value;
+        alert(al);
+    }
+
+    }
+</script>
+<body>
+<div id="container">
+    <h1>用户注册页面</h1>
+    <hr>
+
+    <form method="get" action="用户注册页面设计.html" >
+        <ul>
+            <div>
+                <li class="td1">用户名：</li>
+                <li><input type="text" id="username" name="username" placeholder="请输入用户名" required></li>
+            </div>
+            <div>
+                <li class="td1">密码：</li>
+                <li><input id="pwd" type="password" name="pwd" placeholder="请输入密码" required></li>
+            </div>
+            <div>
+                <li class="td1">确认：</li>
+                <li><input id="pwd1" type="password" name="pwd1" placeholder="请输入确认密码" required></li>
+            </div>
+            <div>
+                <li class="td1">姓名：</li>
+                <li><input id="name" type="text" name="name" placeholder="请输入姓名" required></li>
+            </div>
+            <div>
+                <li class="td1">邮箱：</li>
+                <li><input id="email" type="email" name="email" placeholder="请输入邮箱" required></li>
+            </div>
+            <div>
+                <li class="td1"></li>
+                <li><button type="submit" id="sub" >提交注册</button></li>
+            </div>
+        </ul>
+
+    </form>
+</div>
+</body>
+</html>
